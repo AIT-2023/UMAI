@@ -1,0 +1,10 @@
+セットアップコマンド
+docker-compose run --entrypoint "poetry init --name app --dependency fastapi --dependency uvicorn[standard]" app
+docker-compose run --entrypoint "poetry install --no-root" app
+docker-compose build --no-cache
+docker-compose up
+
+DBのセットアップ(docker-compose upした状態で)
+api モジュールの migrate_db スクリプトを実行する
+docker-compose exec app poetry run python -m api.migrate_db
+docker-compose exec db mysql demo
