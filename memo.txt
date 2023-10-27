@@ -1,0 +1,46 @@
+√ What is your project named? ... front
+√ Would you like to use TypeScript with this project? ... Yes    
+√ Would you like to use ESLint with this project? ... Yes        
+√ Would you like to use Tailwind CSS with this project? ... No  
+√ Would you like to use `src/` directory with this project? ... No
+√ Use App Router (recommended)? ... Yes
+√ Would you like to customize the default import alias? ... No
+
+npm startでエラーが出る
+[Error: ENOENT: no such file or directory, open 'C:\myFolder\workSpace\seminar\umaii\front\.next\BUILD_ID'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\myFolder\\workSpace\\seminar\\umaii\\front\\.next\\BUILD_ID'
+}
+https://stackoverflow.com/questions/76942207/react-by-nextjs-gives-error-when-doing-npm-run-dev
+
+axiosのエラー(URLと同じ現象)
+https://qiita.com/kitutune/items/26674bd434f92d90d548
+
+
+<form onSubmit={handleSubmit}>
+        
+        <input
+          type="text"
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+        />
+        <input 
+          type="text" 
+          name="password"
+          placeholder="Password"
+          onChange={handlePasswordChange} 
+          //value={String(password)}
+        />
+        <button type="submit">Submit</button>
+        
+      </form>
+
+エンドポイントに届かないエラー
+推移
+localhost:8000/api/token		axiosでは、httpをつけなきゃいけない
+http:localhost:8000/api/token		
+https://localhost:8000/api/token
+http://localhost:8000/api/token

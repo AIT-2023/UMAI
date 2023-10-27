@@ -1,0 +1,8 @@
+エラーLog
+
+エラー1
+Unhandled Runtime Error NotFoundError: Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.
+https://zenn.dev/kubo_programmer/articles/599bea940857dc
+
+エラー2
+Chromeの機能で、翻訳機能がある。その翻訳機能を有効にしたうえで、「英語を常に翻訳」というオプションをONにすると、ページを読み込んだ際にエラーが発生する。
