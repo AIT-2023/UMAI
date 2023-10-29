@@ -52,13 +52,23 @@ export default function Login() {
     var params = new URLSearchParams();
     params.append('username', email);
     params.append('password', password);
+
+    const axiosInstance = axios.create({
+      baseURL: "http://localhost:8000",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
     try {
       console.log("try")
-      const response = await axios.post('http://localhost:8000/api/token', params, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
+      // const response = await axios.post('http://localhost:8000/api/token', params, {
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded',
+      //   },
+      // });
+
+      const response = await axiosInstance.post('/api/token', params)
 
       console.log("success")
 
