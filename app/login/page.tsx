@@ -12,7 +12,7 @@ export default function Login() {
   const [error, setError] = useState({ name: "", email: "", password: "" });
   const [token, setToken] = useState(''); // トークンを格納するステート
 
-
+  // Email用のテキストフィールドを変更した際のメソッド
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     if (!e.target.value) {
@@ -29,6 +29,8 @@ export default function Login() {
       setError((prev) => ({ ...prev, email: "" }));
     }
   };
+
+  // password用のテキストフィールドを変更した際のメソッド
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     if (!e.target.value) {
@@ -46,6 +48,7 @@ export default function Login() {
     }
   };
 
+  // 送信ボタンを押した際のメソッド
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("submit")
@@ -61,23 +64,16 @@ export default function Login() {
       },
     })
     try {
-      console.log("try")
-      // const response = await axios.post('http://localhost:8000/api/token', params, {
-      //   headers: {
-      //     'Content-Type': 'application/x-www-form-urlencoded',
-      //   },
-      // });
-
       const response = await axiosInstance.post('/api/token', params)
 
-      console.log("success")
+      console.log('Token in:',response.data.access_token)
 
       // FastAPIからのレスポンスからトークンを抽出
-      const { token } = response.data;
+      setToken(response.data.access_token);
 
       // トークンをCookieに保存
       //Cookies.set('token', token);
-      setCookie(null, 'accessToken', token, {
+      setCookie(null, 'accessToken', response.data.access_token, {
         maxAge: 30 * 24 * 60 * 60,
       });
 
@@ -117,7 +113,12 @@ export default function Login() {
           value={String(password)}
         />
         <button type="submit">Submit</button>
-        
+        {token && (
+        <div>
+          <h2>Generated Token:</h2>
+          <p>{token}</p>
+        </div>
+      )}
       </form>
     </div>
   );
