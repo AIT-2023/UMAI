@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/navigation'
 //import Cookies from 'js-cookie'; // js-cookieをインポート
 import { setCookie, destroyCookie } from 'nookies';
 
@@ -11,7 +12,7 @@ export default function Login() {
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
   const [error, setError] = useState({ name: "", email: "", password: "" });
   const [token, setToken] = useState(''); // トークンを格納するステート
-
+  const router = useRouter()
   // Email用のテキストフィールドを変更した際のメソッド
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -85,9 +86,12 @@ export default function Login() {
       console.log("エラーだよ：");
       console.error(error);
     }
+
   };
 
   return (
+
+    
     <div>
       <h1>
         <p>
@@ -114,10 +118,9 @@ export default function Login() {
         />
         <button type="submit">Submit</button>
         {token && (
-        <div>
-          <h2>Generated Token:</h2>
-          <p>{token}</p>
-        </div>
+        <button type="button" onClick={() => router.push('/log')}>
+        Log
+      </button>
       )}
       </form>
     </div>
