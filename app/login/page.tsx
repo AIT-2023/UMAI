@@ -11,8 +11,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
   const [error, setError] = useState({ name: "", email: "", password: "" });
-  const [token, setToken] = useState(''); // トークンを格納するステート
-  const router = useRouter()
+  const [token, setToken] = useState(""); // トークンを格納するステート
+  const router = useRouter();
   // Email用のテキストフィールドを変更した際のメソッド
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -71,23 +71,23 @@ export default function Login() {
 
       // FastAPIからのレスポンスからトークンを抽出
       setToken(response.data.access_token);
+      //test変数を定義しtokenを代入
+      let Token = response.data.access_token;
+      //testのURLにとぶ
+      router.push(Token);
 
-      // トークンをCookieに保存
-      //Cookies.set('token', token);
-      setCookie(null, 'accessToken', response.data.access_token, {
-        maxAge: 30 * 24 * 60 * 60,
-      });
+    } 
+    catch (error) {
+      //test変数を定義し0を代入
+      let Token = "0";
+      //testのURLにとぶ
+      router.push(`/${Token}`);
 
-      // トークンをstateに保存
-      //setToken(token);
-
-      console.log('Token saved in Cookie:', token);
-    } catch (error) {
       console.log("エラーだよ：");
       console.error(error);
     }
-
   };
+  
 
   return (
 
@@ -98,11 +98,11 @@ export default function Login() {
         Next.js to FastAPI Example
         </p>
       </h1>
-      {token ? (
-        <p>Token: {token}</p>
-      ) : null}
+      
+      
       <form onSubmit={handleSubmit}>
-        
+     
+     
         <input
           type="name"
           name="email"
@@ -117,12 +117,7 @@ export default function Login() {
           value={String(password)}
         />
         <button type="submit">Submit</button>
-        {token && (
-        <button type="button" onClick={() => router.push('/log')}>
-        Log
-      </button>
-      )}
       </form>
     </div>
   );
-}
+ }
